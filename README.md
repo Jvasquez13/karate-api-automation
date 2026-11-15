@@ -1,5 +1,7 @@
 # karate-api-automation
 
+[![API Tests](https://github.com/Jvasquez13/karate-api-automation/actions/workflows/ci.yml/badge.svg)](https://github.com/Jvasquez13/karate-api-automation/actions/workflows/ci.yml) [![Allure report](https://img.shields.io/badge/Allure-live%20report-blue)](https://jvasquez13.github.io/karate-api-automation/)
+
 API test automation with **Karate DSL**, **Java 17** and **Maven**, run against the public [Restful-Booker](https://restful-booker.herokuapp.com) practice API.
 
 The goal of this project is to show a clean, readable API test suite: chained requests, schema-style validation with fuzzy matching, shared configuration and authentication.
@@ -108,6 +110,8 @@ Every push to `main` runs the suite on GitHub Actions (`.github/workflows/ci.yml
 - the **Karate HTML report** and the Allure report as downloadable artifacts of each run.
 
 ### Allure report
+
+**Live report:** https://jvasquez13.github.io/karate-api-automation/ (published by the pipeline on every push to `main`).
 
 ![Allure overview: 16 test cases, 100% passed](docs/allure-overview.png)
 
