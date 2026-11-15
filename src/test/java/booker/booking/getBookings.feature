@@ -17,10 +17,4 @@ Feature: Get Bookings test
         And header Accept = 'application/json'
         When method GET
         Then status 200
-        And match response.firstname == '#string'
-        And match response.lastname == '#string'
-        And match response.totalprice == '#number'
-        And match response.depositpaid == '#boolean'
-        And match response.bookingdates.checkin == '#string'
-        And match response.bookingdates.checkout == '#string'
-        And match response.additionalneeds == '##string'
+        And match response == created.requestBody
