@@ -1,3 +1,4 @@
+@regression
 Feature: Update Booking test
     Background:
         * url baseUrl
@@ -34,6 +35,7 @@ Feature: Update Booking test
         And match response.bookingdates.checkout == '2023-02-10'
         And match response.additionalneeds == 'Lunch'
 
+    @negative
     Scenario: Update a booking without a token is forbidden
         Given path 'booking', id
         And header Accept = 'application/json'

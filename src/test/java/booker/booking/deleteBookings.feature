@@ -1,3 +1,4 @@
+@regression
 Feature: Delete Bookings test
 
     Background:
@@ -17,6 +18,7 @@ Feature: Delete Bookings test
         When method GET
         Then status 404
 
+    @negative
     Scenario: Delete a booking without a token is forbidden
         * def created = call read('classpath:common/create-booking.feature')
         * def id = created.id
@@ -30,6 +32,7 @@ Feature: Delete Bookings test
         When method DELETE
         Then status 201
 
+    @negative
     Scenario: Delete a booking with an invalid token is forbidden
         * def created = call read('classpath:common/create-booking.feature')
         * def id = created.id

@@ -1,3 +1,4 @@
+@smoke @regression
 Feature: Creation of Bookings
 
     Background:

@@ -1,8 +1,10 @@
+@regression
 Feature: Get Bookings test
 
     Background:
         * url baseUrl
 
+    @smoke
     Scenario: Get all bookings from the API
         Given path 'booking'
         When method GET
@@ -28,6 +30,7 @@ Feature: Get Bookings test
         Then status 200
         And match response contains {bookingid: '#(id)'}
 
+    @smoke
     Scenario: Get a specific booking by ID from the API
         * def created = call read('classpath:common/create-booking.feature')
         * def id = created.id
@@ -37,12 +40,14 @@ Feature: Get Bookings test
         Then status 200
         And match response == created.requestBody
 
+    @negative
     Scenario: Get a booking that does not exist
         Given path 'booking', 999999999
         And header Accept = 'application/json'
         When method GET
         Then status 404
 
+    @negative
     Scenario Outline: Get a booking with an invalid id (<id>)
         Given path 'booking', '<id>'
         And header Accept = 'application/json'

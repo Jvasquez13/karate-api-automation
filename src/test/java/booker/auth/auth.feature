@@ -1,3 +1,4 @@
+@smoke @regression
 Feature: Auth steps for consume the api
 
     Background:
