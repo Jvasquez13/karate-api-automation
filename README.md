@@ -82,12 +82,38 @@ After the run, open the HTML report:
 target/karate-reports/karate-summary.html
 ```
 
+## Tags
+
+Scenarios are tagged so a subset can run without touching the code:
+
+| Tag | Meaning | Scenarios |
+|---|---|---|
+| `@smoke` | Fast checks of the critical path: ping, auth, create a booking, read bookings | 5 |
+| `@negative` | What the API must refuse: `404` for unknown or invalid ids, `403` without a valid token | 7 |
+| `@regression` | Every feature, that is, the full suite | 16 |
+
+```bash
+mvn test "-Dkarate.options=--tags @smoke"
+mvn test "-Dkarate.options=--tags @negative"
+mvn test "-Dkarate.options=--tags @regression --tags ~@negative"   # everything except the negative cases
+```
+
+The quotes around `-Dkarate.options` are needed in PowerShell, which otherwise splits the argument at the dot.
+
 ## Reports and CI
 
 Every push to `main` runs the suite on GitHub Actions (`.github/workflows/ci.yml`) and publishes:
 
 - an **Allure report** on GitHub Pages,
 - the **Karate HTML report** and the Allure report as downloadable artifacts of each run.
+
+### Allure report
+
+![Allure overview: 16 test cases, 100% passed](docs/allure-overview.png)
+
+![Allure suites: the 16 scenarios with their duration](docs/allure-suites.png)
+
+Result of a full run: **16 of 16 scenarios passed**. Run `mvn clean test` before generating the report so Allure only reads the current results: old files left in `target/surefire-reports` are counted too.
 
 To see the Allure dashboard locally (requires Docker):
 
@@ -104,5 +130,5 @@ Then open `http://localhost:5050/allure-docker-service/latest-report`.
 - [x] CI pipeline with GitHub Actions and Allure report
 - [x] Negative tests (`404`, `403`)
 - [x] Data-driven scenarios with `Scenario Outline`
-- [ ] Tags (`@smoke`, `@regression`) and running subsets from the runner
+- [x] Tags (`@smoke`, `@regression`, `@negative`) and running subsets from the command line
 - [ ] Negative tests for invalid request bodies (`400`)
