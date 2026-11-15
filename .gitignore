@@ -1,0 +1,5 @@
+# Maven build output (reports, logs, compiled classes)
+target/
+
+# Tooling folder that is not part of the project
+.github/modernize/
