@@ -1,8 +1,8 @@
 Feature: Creation of Bookings
-    
+
     Background:
         * url baseUrl
-        
+
     Scenario: Create a new booking in the API
         Given path 'booking'
         And header Accept = 'application/json'
@@ -23,7 +23,5 @@ Feature: Creation of Bookings
         And request requestBody
         When method POST
         Then status 200
-        And print response
         And match response.bookingid == '#number'
-        * def id = response.bookingid
-        And print id
+        And match response.booking == requestBody

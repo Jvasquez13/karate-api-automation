@@ -1,0 +1,18 @@
+# Local Allure dashboard.
+#
+#   1. mvn test                 (generates target/surefire-reports)
+#   2. docker compose up        (starts the dashboard)
+#   3. open http://localhost:5050/allure-docker-service/latest-report
+#
+# Run `mvn test` again and the report refreshes by itself.
+
+services:
+  allure:
+    image: frankescobar/allure-docker-service
+    ports:
+      - "5050:5050"
+    environment:
+      CHECK_RESULTS_EVERY_SECONDS: 3
+      KEEP_HISTORY: 1
+    volumes:
+      - ./target/surefire-reports:/app/allure-results

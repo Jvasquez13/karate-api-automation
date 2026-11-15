@@ -33,3 +33,16 @@ Feature: Update Booking test
         And match response.bookingdates.checkin == '2023-02-01'
         And match response.bookingdates.checkout == '2023-02-10'
         And match response.additionalneeds == 'Lunch'
+
+    Scenario: Update a booking without a token is forbidden
+        Given path 'booking', id
+        And header Accept = 'application/json'
+        And request created.requestBody
+        When method PUT
+        Then status 403
+
+        # clean up the booking created in the Background
+        Given path 'booking', id
+        And header Cookie = 'token=' + authToken
+        When method DELETE
+        Then status 201
