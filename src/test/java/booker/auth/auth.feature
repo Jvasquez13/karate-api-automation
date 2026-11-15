@@ -10,3 +10,4 @@ Feature: Auth steps for consume the api
         Then status 200
         And print response
         And match response.token == '#string'
+        * def token = response.token
